@@ -10,7 +10,6 @@ pipeline {
     }
 
     stages {
-
         stage('Build image') {
             steps {
                 sh 'docker build . -t dreamfactoryhr/axenture-explorer:latest'
