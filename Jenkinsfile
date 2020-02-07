@@ -58,7 +58,7 @@ pipeline {
     post {
         success {
             script {
-                if (env.BRANCH_NAME == 'master') {
+                if (env.BRANCH_NAME == 'hackNoMessage') {
                     slackSend(channel: 'test-results', color: 'good',
                             message: "Success \'${env.JOB_NAME} [${env.BUILD_NUMBER}]\'" +
                                     " (<${env.RUN_DISPLAY_URL}|Pipeline>)",
