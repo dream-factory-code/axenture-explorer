@@ -36,7 +36,7 @@ pipeline {
 
                     slackMessage = "Deployed *Axenture Explorer* to *STAGING* (" +
                             "<${env.RUN_DISPLAY_URL}|Pipeline>" +
-                            ", <http://172.31.3.195:9090/|Explorer Application>" +
+                            ", <http://https://testnet.dream-factory.hr/|Explorer Application>" +
                             ") \n" +
                             "Pipeline time: ${buildTime}"
 
