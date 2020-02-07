@@ -13,7 +13,7 @@ pipeline {
 
         stage('Build image') {
             steps {
-                sh 'docker build . -t latest'
+                sh 'docker build . -t axenture-explorer:latest'
             }
         }
 
