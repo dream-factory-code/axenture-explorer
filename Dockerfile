@@ -10,7 +10,7 @@ RUN npm install -g @angular/cli
 # add app
 COPY . /app
 # generate build
-RUN ng build --output-path=dist
+RUN ng build --prod --output-path=dist
 ############
 ### prod ###
 ############
