@@ -27,9 +27,9 @@ pipeline {
                 ' | xargs --no-run-if-empty sudo docker container stop ' +
                 ' | xargs --no-run-if-empty sudo docker container rm" '
 
-                sh 'ssh admin@172.31.3.195 sudo docker run -d '+
+                sh 'ssh admin@172.31.3.195 sudo docker run -d ' +
                 ' -p 9090:80 --name axenture-explorer ' +
-                ' --user 1000:1000 dreamfactoryhr/axenture-explorer:latest'
+                ' dreamfactoryhr/axenture-explorer:latest'
 
                 script {
                     def buildTime = currentBuild.durationString.replace(' and counting', '')
