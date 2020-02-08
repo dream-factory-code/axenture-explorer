@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core'
 import Web3 from 'web3'
 import { environment } from '../../environments/environment'
+import { from } from 'rxjs'
+import { flatMap, tap } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +10,6 @@ import { environment } from '../../environments/environment'
 export class Web3Service {
   web3: Web3
   constructor() {
-    // in node.js use: var Web3 = require('web3');
-
     this.web3 = new Web3(environment.apiUrl)
   }
 }

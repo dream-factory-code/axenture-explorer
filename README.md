@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm run proxy` for a dev server to avoid CORS problem. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. If you need to change port, change it also in proxy.conf.json
 
 ## Code scaffolding
 

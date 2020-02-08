@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Web3Service } from 'src/app/services/web3.service'
+import { CurrentBlockService } from 'src/app/services/current-block.service'
+import { PollingService } from 'src/app/services/polling.service'
 
 @Component({
   selector: 'app-welcome',
@@ -7,7 +9,11 @@ import { Web3Service } from 'src/app/services/web3.service'
   styleUrls: ['./welcome.component.scss'],
 })
 export class WelcomeComponent implements OnInit {
-  constructor(private web3Service: Web3Service) {}
+  currentBlock$
+  constructor(private currentBlockService: CurrentBlockService, private pollingService: PollingService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.currentBlock$ = this.currentBlockService.currentBlock$
+    this.pollingService.poll$(this.currentBlockService.getCurrentBlock$()).subscribe()
+  }
 }
