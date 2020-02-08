@@ -1,0 +1,11 @@
+{
+  "/blockchain": {
+    "target": "https://callchain.dream-factory.hr/blockchain",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/blockchain": ""
+    },
+    "logLevel": "debug"
+  }
+}
