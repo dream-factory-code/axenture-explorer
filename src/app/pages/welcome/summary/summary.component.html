@@ -1,0 +1,28 @@
+<nz-table #summary [nzData]="summary$ | async" [nzShowPagination]="false" [nzLoading]="isLoading">
+  <thead>
+    <tr>
+      <th>Current Block</th>
+      <th>Api Version</th>
+      <th>Client/Node Version</th>
+      <th>Current Gas Price</th>
+      <th>Hash Rate</th>
+      <th>Number of Peers</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of summary.data">
+      <td>{{ data.blockNumber }}</td>
+      <td>{{ data.apiVersion }}</td>
+      <td>{{ data.clientNodeVersion }}</td>
+      <td>
+        {{ data.currentGasPrice }}
+      </td>
+      <td>
+        {{ data.hashRate }}
+      </td>
+      <td>
+        {{ data.numberOfPeers }}
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

@@ -11,20 +11,16 @@ import { CurrentBlockAction } from '../state/current-block.actions'
   providedIn: 'root',
 })
 export class CurrentBlockService {
-  blockNumber$: Observable<number>
-  constructor(private store: Store, private web3Service: Web3Service) {
-    this.blockNumber$ = from(this.web3Service.web3.eth.getBlockNumber())
-  }
+  constructor(private store: Store, private web3Service: Web3Service) {}
   @Select(CurrentBlockState.currentBlock)
   currentBlock$: Observable<IBlock>
 
-  getBlock$(number): Observable<IBlock> {
+  getBlock$(number: number | 'latest'): Observable<IBlock> {
     return from((this.web3Service.web3.eth.getBlock(number) as unknown) as Promise<IBlock>)
   }
 
   getCurrentBlock$(): Observable<IBlock> {
-    return this.blockNumber$.pipe(
-      flatMap((num) => this.getBlock$(num)),
+    return this.getBlock$('latest').pipe(
       flatMap((block) => this.store.dispatch([new CurrentBlockAction.SetCurrentBlock(block)])),
       withLatestFrom(this.currentBlock$),
       map((results) => results.pop())

@@ -12,4 +12,7 @@ export class Web3Service {
   constructor() {
     this.web3 = new Web3(environment.apiUrl)
   }
+  reinitiate() {
+    this.web3 = new Web3(environment.apiUrl)
+  }
 }

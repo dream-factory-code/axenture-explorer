@@ -1,0 +1,31 @@
+<nz-table
+  #allBlocks
+  [nzData]="allBlocks$ | async"
+  [nzShowPagination]="true"
+  [nzLoading]="isLoading"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="navigate($event)"
+  (nzPageSizeChange)="navigate(0, $event)"
+  [nzTotal]="total$ | async"
+>
+  <thead>
+    <tr>
+      <th>number</th>
+      <th>transactions</th>
+      <th>size</th>
+      <th>gasLimit</th>
+      <th>gasUsed</th>
+      <th>timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of allBlocks.data">
+      <td>{{ data.number }}</td>
+      <td>{{ data.transactions.length }}</td>
+      <td>{{ data.size }}</td>
+      <td>{{ data.gasLimit }}</td>
+      <td>{{ data.gasUsed }}</td>
+      <td>{{ data.timestamp }}</td>
+    </tr>
+  </tbody>
+</nz-table>

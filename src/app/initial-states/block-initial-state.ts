@@ -18,7 +18,7 @@ export const blockInitialState: IBlock = {
   stateRoot: null,
   timestamp: null,
   totalDifficulty: null,
-  transactions: null,
+  transactions: [],
   transactionsRoot: null,
-  uncles: null,
+  uncles: [],
 }

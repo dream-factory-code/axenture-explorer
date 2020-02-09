@@ -1,0 +1,22 @@
+<nz-table #recentBlocks [nzData]="recentBlocks$ | async" [nzShowPagination]="false" [nzLoading]="isLoading">
+  <thead>
+    <tr>
+      <th>number</th>
+      <th>transactions</th>
+      <th>size</th>
+      <th>gasLimit</th>
+      <th>gasUsed</th>
+      <th>timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of recentBlocks.data">
+      <td>{{ data.number }}</td>
+      <td>{{ data.transactions.length }}</td>
+      <td>{{ data.size }}</td>
+      <td>{{ data.gasLimit }}</td>
+      <td>{{ data.gasUsed }}</td>
+      <td>{{ data.timestamp }}</td>
+    </tr>
+  </tbody>
+</nz-table>

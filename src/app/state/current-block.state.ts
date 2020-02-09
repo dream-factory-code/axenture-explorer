@@ -1,7 +1,7 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store'
 import { ImmutableContext } from '@ngxs-labs/immer-adapter'
 import { IBlock } from '../interfaces/block.interface'
-import { blockInitialState } from './block-initial-state'
+import { blockInitialState } from '../initial-states/block-initial-state'
 import { CurrentBlockAction } from './current-block.actions'
 
 @State<IBlock>({
