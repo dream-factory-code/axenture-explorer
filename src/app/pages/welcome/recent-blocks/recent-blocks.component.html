@@ -10,13 +10,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of recentBlocks.data">
-      <td>{{ data.number }}</td>
-      <td>{{ data.transactions.length }}</td>
-      <td>{{ data.size }}</td>
-      <td>{{ data.gasLimit }}</td>
-      <td>{{ data.gasUsed }}</td>
-      <td>{{ data.timestamp }}</td>
-    </tr>
+    <ng-container *ngFor="let data of recentBlocks.data">
+      <tr [ngClass]="{ new: data.new }">
+        <td>{{ data.number }}</td>
+        <td>{{ data.transactions.length }}</td>
+        <td>{{ data.size }}</td>
+        <td>{{ data.gasLimit }}</td>
+        <td>{{ data.gasUsed }}</td>
+        <td>{{ data.timestamp }}</td>
+      </tr>
+    </ng-container>
   </tbody>
 </nz-table>

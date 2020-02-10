@@ -15,17 +15,11 @@ import { SummaryService } from './summary.service'
 })
 export class RecentBlocksService {
   blockNumber$: Observable<number>
-  constructor(
-    private store: Store,
-    private web3Service: Web3Service,
-    private pollingService: PollingService,
-    private summaryService: SummaryService
-  ) {
-    console.log(this.web3Service.web3)
-  }
+  constructor(private store: Store, private web3Service: Web3Service, private summaryService: SummaryService) {}
   @Select(RecentBlocksState.RecentBlocks)
   recentBlocks$: Observable<IBlock[]>
   private getBlocks$(number, count): Observable<IBlock[]> {
+    if (count === 0) return of([])
     const observables$ = new Array(count)
       .fill(0)
       .map((zero, index) => from((this.web3Service.web3.eth.getBlock(number - index) as unknown) as Promise<IBlock>))
@@ -42,7 +36,7 @@ export class RecentBlocksService {
         } else {
           return this.getBlocks$(summary.blockNumber, summary.blockNumber - recentBlocks[0].number).pipe(
             map((newBlocks) => {
-              console.log(newBlocks.concat(recentBlocks).splice(recentBlocks.length - newBlocks.length, recentBlocks.length - 1))
+              newBlocks.map((block) => Object.assign(block, { new: true }))
               return newBlocks.concat(recentBlocks).slice(0, 10)
             })
           )

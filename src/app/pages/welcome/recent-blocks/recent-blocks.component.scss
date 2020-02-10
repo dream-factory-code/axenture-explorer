@@ -1,0 +1,12 @@
+.new {
+  animation-name: newItems;
+  animation-duration: 2s;
+}
+
+@keyframes newItems {
+  from {
+    background-color: rgba(10, 190, 255, 0.5);
+  }
+  to {
+  }
+}

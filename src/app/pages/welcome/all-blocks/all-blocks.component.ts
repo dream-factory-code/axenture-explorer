@@ -17,18 +17,15 @@ export class AllBlocksComponent implements OnInit {
   constructor(private allBlocksService: AllBlocksService, private summaryService: SummaryService) {}
   total$
   ngOnInit() {
-    this.allBlocksService
-      .getAllBlocks$(1, 10)
-      .pipe(tap(console.log))
-      .subscribe(() => {
-        this.isLoading = false
-      })
+    this.allBlocksService.getAllBlocks$(1, 10).subscribe(() => {
+      this.isLoading = false
+    })
 
-    this.allBlocks$ = this.allBlocksService.allBlocks$.pipe(tap(console.log))
+    this.allBlocks$ = this.allBlocksService.allBlocks$
     this.total$ = this.summaryService.summary$.pipe(map((item) => item.blockNumber))
   }
 
-  navigate(page, take) {
+  navigate(page?, take?) {
     this.allBlocksService.getAllBlocks$(page, take).subscribe(() => {
       this.isLoading = false
     })

@@ -5,8 +5,10 @@
   [nzLoading]="isLoading"
   [nzFrontPagination]="false"
   (nzPageIndexChange)="navigate($event)"
-  (nzPageSizeChange)="navigate(0, $event)"
+  (nzPageSizeChange)="navigate(1, $event)"
   [nzTotal]="total$ | async"
+  [nzShowSizeChanger]="true"
+  [nzShowQuickJumper]="true"
 >
   <thead>
     <tr>
@@ -19,13 +21,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of allBlocks.data">
-      <td>{{ data.number }}</td>
-      <td>{{ data.transactions.length }}</td>
-      <td>{{ data.size }}</td>
-      <td>{{ data.gasLimit }}</td>
-      <td>{{ data.gasUsed }}</td>
-      <td>{{ data.timestamp }}</td>
-    </tr>
+    <ng-container *ngFor="let data of allBlocks.data">
+      <tr>
+        <td>{{ data.number }}</td>
+        <td>{{ data.transactions.length }}</td>
+        <td>{{ data.size }}</td>
+        <td>{{ data.gasLimit }}</td>
+        <td>{{ data.gasUsed }}</td>
+        <td>{{ data.timestamp }}</td>
+      </tr>
+    </ng-container>
   </tbody>
 </nz-table>
