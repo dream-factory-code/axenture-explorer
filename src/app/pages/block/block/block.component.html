@@ -1,0 +1,30 @@
+<nz-descriptions [nzTitle]="'Block Info #' + (block$ | async)?.number" nzBordered [nzColumn]="1">
+  <nz-descriptions-item *ngFor="let item of blockDisplay$ | async" [nzTitle]="item.title">
+    <div class="data-col">{{ item.data }}</div>
+  </nz-descriptions-item>
+</nz-descriptions>
+<nz-descriptions nzTitle="Transactions" nzBordered [nzColumn]="1"> </nz-descriptions>
+<nz-table
+  #virtualTable
+  nzVirtualScroll
+  [nzVirtualItemSize]="0"
+  [nzData]="(block$ | async)?.transactions"
+  [nzFrontPagination]="false"
+  [nzShowPagination]="false"
+  [nzScroll]="{ x: 'auto', y: '500px' }"
+>
+  <thead>
+    <tr>
+      <th>Transaction Hash</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-template nz-virtual-scroll let-data let-index="index">
+      <tr>
+        <td>
+          <a>{{ data }}</a>
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</nz-table>

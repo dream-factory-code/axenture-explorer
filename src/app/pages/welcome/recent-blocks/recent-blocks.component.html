@@ -12,7 +12,7 @@
   </thead>
   <tbody>
     <ng-container *ngFor="let data of recentBlocks.data">
-      <tr [ngClass]="{ new: data.new }">
+      <tr [ngClass]="{ new: data.new }" [routerLink]="['block', data.number]" style="cursor: pointer;">
         <td>{{ data.number }}</td>
         <td>{{ data.transactions.length }}</td>
         <td>{{ data.size }}</td>
