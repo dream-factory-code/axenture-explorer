@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
 import { Web3Service } from './web3.service'
-import { from, Observable, forkJoin, of } from 'rxjs'
+import { from, Observable, forkJoin, of, merge } from 'rxjs'
 import { Store, Select } from '@ngxs/store'
 
 import { IBlock } from '../interfaces/block.interface'
-import { flatMap, withLatestFrom, map } from 'rxjs/operators'
+import { flatMap, withLatestFrom, map, reduce, tap, skip } from 'rxjs/operators'
 import { RecentBlocksState } from '../state/recent-blocks.state'
 import { RecentBlocksAction } from '../state/recent-blocks.actions'
 import { PollingService } from './polling.service'
@@ -15,18 +15,31 @@ import { SummaryService } from './summary.service'
 })
 export class RecentBlocksService {
   blockNumber$: Observable<number>
+
+  private mapTimeStampToObject = true
+
   constructor(private store: Store, private web3Service: Web3Service, private summaryService: SummaryService) {}
+
   @Select(RecentBlocksState.RecentBlocks)
   recentBlocks$: Observable<IBlock[]>
+
+  // move to common/service/block
   private getBlocks$(number, count): Observable<IBlock[]> {
     if (count === 0) return of([])
+
     const observables$ = new Array(count)
       .fill(0)
       .map((zero, index) => from((this.web3Service.web3.eth.getBlock(number - index) as unknown) as Promise<IBlock>))
-
     return forkJoin(observables$)
+    // return merge(...observables$).pipe(
+    //   reduce((res, item) => {
+    //     res.push(item)
+    //     return res as any
+    //   }, [] as any)
+    // )
   }
-  getRecentBlocks$(): Observable<any> {
+
+  getRecentBlocks$(): Observable<IBlock[]> {
     return this.summaryService.summary$.pipe(
       withLatestFrom(this.recentBlocks$),
       flatMap(([summary, recentBlocks]) => {

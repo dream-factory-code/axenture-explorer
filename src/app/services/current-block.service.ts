@@ -12,6 +12,7 @@ import { CurrentBlockAction } from '../state/current-block.actions'
 })
 export class CurrentBlockService {
   constructor(private store: Store, private web3Service: Web3Service) {}
+
   @Select(CurrentBlockState.currentBlock)
   currentBlock$: Observable<IBlock>
 

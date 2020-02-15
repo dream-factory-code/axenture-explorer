@@ -13,9 +13,12 @@ import { SummaryService } from './summary.service'
 })
 export class AllBlocksService {
   blockNumber$: Observable<number>
+
   constructor(private store: Store, private web3Service: Web3Service, private summaryService: SummaryService) {}
+
   @Select(AllBlocksState.allBlocks)
   allBlocks$: Observable<IBlock[]>
+
   private getBlocks$(number, count): Observable<IBlock[]> {
     const observables$ = new Array(count)
       .fill(0)
@@ -23,6 +26,7 @@ export class AllBlocksService {
 
     return forkJoin(observables$)
   }
+
   getAllBlocks$(page = 0, take = 10): Observable<any> {
     return this.getBlocks$((page - 1) * take, take).pipe(
       flatMap((blocks) => this.store.dispatch([new AllBlocksAction.SetAllBlocks(blocks)])),

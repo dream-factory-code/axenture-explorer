@@ -1,23 +1,25 @@
+<h1>All Blocks</h1>
 <nz-table
   #allBlocks
   [nzData]="allBlocks$ | async"
   [nzShowPagination]="true"
   [nzLoading]="isLoading"
   [nzFrontPagination]="false"
-  (nzPageIndexChange)="navigate($event)"
+  (nzPageIndexChange)="navigate($event, pageSize)"
   (nzPageSizeChange)="navigate(1, $event)"
   [nzTotal]="total$ | async"
   [nzShowSizeChanger]="true"
   [nzShowQuickJumper]="true"
+  class="m-b-25"
 >
   <thead>
     <tr>
-      <th>number</th>
-      <th>transactions</th>
-      <th>size</th>
-      <th>gasLimit</th>
-      <th>gasUsed</th>
-      <th>timestamp</th>
+      <th>Number</th>
+      <th>Transactions</th>
+      <th>Size</th>
+      <th>Gas Limit</th>
+      <th>Gas Used</th>
+      <th>Date</th>
     </tr>
   </thead>
   <tbody>
@@ -28,7 +30,7 @@
         <td>{{ data.size }}</td>
         <td>{{ data.gasLimit }}</td>
         <td>{{ data.gasUsed }}</td>
-        <td>{{ data.timestamp }}</td>
+        <td>{{ data.timestamp | date: 'short' }}</td>
       </tr>
     </ng-container>
   </tbody>

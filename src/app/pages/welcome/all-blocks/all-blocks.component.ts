@@ -14,20 +14,26 @@ export class AllBlocksComponent implements OnInit {
   allBlocks$: Observable<IBlock[]>
   isLoading = true
 
+  pageSize = 10
+
   constructor(private allBlocksService: AllBlocksService, private summaryService: SummaryService) {}
   total$
   ngOnInit() {
-    this.allBlocksService.getAllBlocks$(1, 10).subscribe(() => {
-      this.isLoading = false
-    })
+    this.allBlocksService.getAllBlocks$(1, 10).subscribe()
 
-    this.allBlocks$ = this.allBlocksService.allBlocks$
+    this.allBlocks$ = this.allBlocksService.allBlocks$.pipe(
+      map((blocks) => blocks.map((block: any) => Object.assign({}, block, { timestamp: new Date(block.timestamp * 1000) }))),
+      tap((items) => {
+        if (items.length) this.isLoading = false
+      })
+    )
+
     this.total$ = this.summaryService.summary$.pipe(map((item) => item.blockNumber))
   }
 
   navigate(page?, take?) {
-    this.allBlocksService.getAllBlocks$(page, take).subscribe(() => {
-      this.isLoading = false
-    })
+    this.isLoading = true
+    this.pageSize = take || this.pageSize
+    this.allBlocksService.getAllBlocks$(page, take).subscribe()
   }
 }

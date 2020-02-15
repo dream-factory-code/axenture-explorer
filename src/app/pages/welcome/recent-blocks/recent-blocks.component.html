@@ -1,12 +1,13 @@
-<nz-table #recentBlocks [nzData]="recentBlocks$ | async" [nzShowPagination]="false" [nzLoading]="isLoading">
+<h1>Latest Blocks</h1>
+<nz-table #recentBlocks [nzData]="recentBlocks$ | async" [nzShowPagination]="false" [nzLoading]="isLoading" class="m-b-25">
   <thead>
     <tr>
-      <th>number</th>
-      <th>transactions</th>
-      <th>size</th>
-      <th>gasLimit</th>
-      <th>gasUsed</th>
-      <th>timestamp</th>
+      <th>Number</th>
+      <th>Transactions</th>
+      <th>Size</th>
+      <th>Gas Limit</th>
+      <th>Gas Used</th>
+      <th>Date</th>
     </tr>
   </thead>
   <tbody>
@@ -17,7 +18,7 @@
         <td>{{ data.size }}</td>
         <td>{{ data.gasLimit }}</td>
         <td>{{ data.gasUsed }}</td>
-        <td>{{ data.timestamp }}</td>
+        <td>{{ data.timestamp | date: 'short' }}</td>
       </tr>
     </ng-container>
   </tbody>

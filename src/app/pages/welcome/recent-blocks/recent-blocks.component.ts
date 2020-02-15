@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Observable } from 'rxjs'
 import { IBlock } from 'src/app/interfaces/block.interface'
 import { RecentBlocksService } from 'src/app/services/recent-blocks.service'
-import { tap } from 'rxjs/operators'
+import { tap, map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-recent-blocks',
@@ -10,16 +10,26 @@ import { tap } from 'rxjs/operators'
   styleUrls: ['./recent-blocks.component.scss'],
 })
 export class RecentBlocksComponent implements OnInit {
-  recentBlocks$: Observable<IBlock[]>
+  recentBlocks$: Observable<TableRow[]>
   isLoading = true
 
   constructor(private recentBlocksService: RecentBlocksService) {}
 
   ngOnInit() {
     this.recentBlocks$ = this.recentBlocksService.getRecentBlocks$().pipe(
-      tap(() => {
-        this.isLoading = false
+      map((blocks) => blocks.map((block: any) => Object.assign({}, block, { timestamp: new Date(block.timestamp * 1000) }))),
+      tap((items) => {
+        if (items.length) this.isLoading = false
       })
     )
   }
+}
+
+interface TableRow {
+  number: number
+  transactions: number
+  size: number
+  gasLimit: number
+  gasUsed: number
+  timestamp: Date
 }
