@@ -6,6 +6,6 @@ export const summaryInitialState: ISummary = {
   clientNodeVersion: null,
   networkProtocolVersion: null,
   currentGasPrice: null,
-  hashRate: null,
+  noSealers: null,
   numberOfPeers: null,
 }

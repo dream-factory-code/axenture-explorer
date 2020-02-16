@@ -6,9 +6,9 @@ import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions'
 import { BlockRoutingModule } from './block-routing.module'
 import { NgxsModule } from '@ngxs/store'
 import { BlockState } from './state/block.state'
-import { NzTableModule } from 'ng-zorro-antd/table'
+import { AntdModule } from 'src/app/antd.module'
 @NgModule({
   declarations: [BlockComponent],
-  imports: [BlockRoutingModule, CommonModule, NzDescriptionsModule, NgxsModule.forFeature([BlockState]), NzTableModule],
+  imports: [BlockRoutingModule, CommonModule, NzDescriptionsModule, NgxsModule.forFeature([BlockState]), AntdModule],
 })
 export class BlockModule {}

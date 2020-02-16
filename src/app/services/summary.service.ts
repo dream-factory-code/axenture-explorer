@@ -18,7 +18,7 @@ export class SummaryService {
       this.web3Service.web3.eth.getProtocolVersion(),
       this.web3Service.web3.eth.getNodeInfo(),
       this.web3Service.web3.eth.getGasPrice(),
-      this.web3Service.web3.eth.getHashrate(),
+      this.web3Service.getSealers$().pipe(map((item: any) => item.result.length)),
       this.web3Service.web3.eth.net.getPeerCount()
     )
     this.staticSummary$.subscribe()
@@ -40,14 +40,14 @@ export class SummaryService {
     return this.pollingService.pollMultiplePromises$([this.web3Service.web3.eth.getBlockNumber]).pipe(
       withLatestFrom(this.staticSummary$),
       map(([[blockNumber], [...rest]]) => [blockNumber, ...rest]),
-      map(([blockNumber, protocolVersion, nodeInfo, gasPrice, hashRate, peerCount]) => {
+      map(([blockNumber, protocolVersion, nodeInfo, gasPrice, noSealers, peerCount]) => {
         return {
           blockNumber,
           apiVersion: this.web3Service.web3.version,
           clientNodeVersion: nodeInfo,
           networkProtocolVersion: protocolVersion,
           currentGasPrice: gasPrice,
-          hashRate,
+          noSealers,
           numberOfPeers: peerCount,
         } as ISummary
       })

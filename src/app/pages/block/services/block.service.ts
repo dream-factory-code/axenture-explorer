@@ -17,7 +17,7 @@ export class BlockService {
   block$: Observable<IBlock>
 
   private getBlockCall$(number: number | 'latest'): Observable<IBlock> {
-    return from((this.web3Service.web3.eth.getBlock(number) as unknown) as Promise<IBlock>)
+    return from((this.web3Service.web3.eth.getBlock(number, true) as unknown) as Promise<IBlock>)
   }
 
   getBlock$(number: number | 'latest' = 'latest'): Observable<IBlock> {

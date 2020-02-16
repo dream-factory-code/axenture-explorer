@@ -5,26 +5,33 @@
 </nz-descriptions>
 <nz-descriptions nzTitle="Transactions" nzBordered [nzColumn]="1"> </nz-descriptions>
 <nz-table
-  #virtualTable
-  nzVirtualScroll
-  [nzVirtualItemSize]="0"
+  #transactionsTable
   [nzData]="(block$ | async)?.transactions"
-  [nzFrontPagination]="false"
-  [nzShowPagination]="false"
-  [nzScroll]="{ x: 'auto', y: '500px' }"
+  nzFrontPagination
+  nzShowPagination
+  [nzPageSize]="10"
+  [nzShowSizeChanger]="true"
 >
   <thead>
     <tr>
       <th>Transaction Hash</th>
+      <th>From</th>
+      <th>To</th>
     </tr>
   </thead>
   <tbody>
-    <ng-template nz-virtual-scroll let-data let-index="index">
+    <ng-container *ngFor="let data of transactionsTable.data">
       <tr>
-        <td>
-          <a>{{ data }}</a>
+        <td class="wb-b-a">
+          <a>{{ data.hash }}</a>
+        </td>
+        <td class="wb-b-a">
+          {{ data.from }}
+        </td>
+        <td class="wb-b-a">
+          {{ data.to }}
         </td>
       </tr>
-    </ng-template>
+    </ng-container>
   </tbody>
 </nz-table>

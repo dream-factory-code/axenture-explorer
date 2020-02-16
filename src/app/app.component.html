@@ -5,23 +5,23 @@
         <img src="assets/axenture-web-1.png" alt="logo" />
       </a>
     </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" [nzSelectable]="false">
       <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
         <ul>
-          <li nz-menu-item>
-            <a routerLink="/">Welcome</a>
+          <li nz-menu-item [nzSelected]="isNavItemSelected()">
+            <a routerLink="/">Welcome </a>
           </li>
-          <li nz-menu-item nzMatchRouter>
+          <li nz-menu-item [nzSelected]="isNavItemSelected('block')">
             <a routerLink="/block">Block</a>
           </li>
-          <li nz-menu-item nzMatchRouter>
+          <li nz-menu-item>
             <a>Workplace</a>
           </li>
         </ul>
       </li>
       <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
         <ul>
-          <li nz-menu-item nzMatchRouter>
+          <li nz-menu-item>
             <a>Basic Form</a>
           </li>
         </ul>

@@ -4,6 +4,6 @@ export interface ISummary {
   clientNodeVersion: string
   networkProtocolVersion: string
   currentGasPrice: string
-  hashRate: number
+  noSealers: number
   numberOfPeers: number
 }
