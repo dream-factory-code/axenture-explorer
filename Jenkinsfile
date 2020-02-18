@@ -4,9 +4,9 @@ pipeline {
     options { disableConcurrentBuilds() }
 
     environment {
-            SLACK_URL   = credentials('slackUrl')
-            SLACK_TOKEN = credentials('slackToken')
-            SLACK_TEAM  = credentials('slackTeam')
+        SLACK_URL   = credentials('slackUrl')
+        SLACK_TOKEN = credentials('slackToken')
+        SLACK_TEAM  = credentials('slackTeam')
     }
 
     stages {
