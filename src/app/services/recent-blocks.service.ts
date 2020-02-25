@@ -50,7 +50,7 @@ export class RecentBlocksService {
           return this.getBlocks$(summary.blockNumber, summary.blockNumber - recentBlocks[0].number).pipe(
             map((newBlocks) => {
               newBlocks.map((block) => Object.assign(block, { new: true }))
-              return newBlocks.concat(recentBlocks).slice(0, 10)
+              return newBlocks.concat(recentBlocks.map((block) => Object.assign({ ...block }, { new: false }))).slice(0, 10)
             })
           )
         }
