@@ -1,0 +1,11 @@
+<nz-descriptions [nzTitle]="'Address ' + (address$ | async)?.address" nzBordered [nzColumn]="1">
+  <nz-descriptions-item nzTitle="Balance">
+    <div class="data-col">{{ (address$ | async)?.balance }} ETH</div>
+  </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Storage">
+    <div class="data-col">{{ (address$ | async)?.storage }}</div>
+  </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Transaction Count">
+    <div class="data-col">{{ (address$ | async)?.transactionCount }}</div>
+  </nz-descriptions-item>
+</nz-descriptions>

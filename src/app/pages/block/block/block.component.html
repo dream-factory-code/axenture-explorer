@@ -1,6 +1,10 @@
 <nz-descriptions [nzTitle]="'Block Info #' + (block$ | async)?.number" nzBordered [nzColumn]="1">
   <nz-descriptions-item *ngFor="let item of blockDisplay$ | async" [nzTitle]="item.title">
-    <div class="data-col">{{ item.data }}</div>
+    <div class="data-col">
+      <ng-container *ngIf="item.linkVal; else notLink"
+        ><a [routerLink]="[item.linkVal]">{{ item.data }}</a></ng-container
+      ><ng-template #notLink>{{ item.data }}</ng-template>
+    </div>
   </nz-descriptions-item>
 </nz-descriptions>
 <nz-descriptions nzTitle="Transactions" nzBordered [nzColumn]="1"> </nz-descriptions>
@@ -26,10 +30,10 @@
           <a>{{ data.hash }}</a>
         </td>
         <td class="wb-b-a">
-          {{ data.from }}
+          <a [routerLink]="['/address', data.from]"> {{ data.from }}</a>
         </td>
         <td class="wb-b-a">
-          {{ data.to }}
+          <a [routerLink]="['/address', data.to]"> {{ data.to }}</a>
         </td>
       </tr>
     </ng-container>

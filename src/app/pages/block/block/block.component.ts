@@ -21,7 +21,7 @@ export class BlockComponent implements OnInit {
     'hash',
     'parentHash',
     'sha3Uncles',
-    { key: 'miner', title: 'Mined By' },
+    { key: 'miner', title: 'Mined By', linkFn: (item) => `/address/${item}` },
     'difficulty',
     'totalDifficulty',
     'size',
@@ -48,6 +48,7 @@ export class BlockComponent implements OnInit {
         return this.displayOrder.map((item: any) => {
           const key = item.key || item
           const value = item.format ? item.format(block[key]) : block[key]
+          const linkVal = item.linkFn ? item.linkFn(value) : undefined
           return {
             title:
               item.title ||
@@ -56,6 +57,7 @@ export class BlockComponent implements OnInit {
                 .split(/\s/)
                 .join(' '),
             data: value,
+            linkVal,
           }
         })
       })
@@ -77,6 +79,6 @@ export class BlockComponent implements OnInit {
 interface IBlockDisplay {
   title: string
   data: any
-  isLink?: boolean
+  linkVal?: any
   dataType?: string
 }

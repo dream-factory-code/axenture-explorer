@@ -18,11 +18,14 @@ import { AntdModule } from './antd.module'
 import { RecentBlocksState } from './state/recent-blocks.state'
 import { SummaryState } from './state/summary.state'
 import { AllBlocksState } from './state/all-blocks.state'
+import { TransactionComponent } from './pages/transaction/transaction.component'
+import { AddressComponent } from './pages/address/address.component'
+import { CurrentAddressState } from './state/current-address.state'
 
 registerLocaleData(en)
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TransactionComponent, AddressComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,7 +34,9 @@ registerLocaleData(en)
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgxsModule.forRoot([CurrentBlockState, RecentBlocksState, SummaryState, AllBlocksState], { developmentMode: !environment.production }),
+    NgxsModule.forRoot([CurrentBlockState, RecentBlocksState, SummaryState, AllBlocksState, CurrentAddressState], {
+      developmentMode: !environment.production,
+    }),
     //NgxsLoggerPluginModule.forRoot(),
     AntdModule,
   ],
