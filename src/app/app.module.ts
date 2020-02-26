@@ -21,6 +21,7 @@ import { AllBlocksState } from './state/all-blocks.state'
 import { TransactionComponent } from './pages/transaction/transaction.component'
 import { AddressComponent } from './pages/address/address.component'
 import { CurrentAddressState } from './state/current-address.state'
+import { TransactionState } from './state/transaction.state'
 
 registerLocaleData(en)
 
@@ -34,10 +35,10 @@ registerLocaleData(en)
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgxsModule.forRoot([CurrentBlockState, RecentBlocksState, SummaryState, AllBlocksState, CurrentAddressState], {
+    NgxsModule.forRoot([CurrentBlockState, RecentBlocksState, SummaryState, AllBlocksState, CurrentAddressState, TransactionState], {
       developmentMode: !environment.production,
     }),
-    //NgxsLoggerPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
     AntdModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

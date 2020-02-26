@@ -27,7 +27,7 @@
     <ng-container *ngFor="let data of transactionsTable.data">
       <tr>
         <td class="wb-b-a">
-          <a>{{ data.hash }}</a>
+          <a [routerLink]="['/transaction', data.hash]">{{ data.hash }}</a>
         </td>
         <td class="wb-b-a">
           <a [routerLink]="['/address', data.from]"> {{ data.from }}</a>
