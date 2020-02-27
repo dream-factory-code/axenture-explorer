@@ -1,1 +1,47 @@
-<p>transaction works!</p>
+<nz-descriptions [nzTitle]="'Transaction ' + (transaction$ | async)?.transaction?.hash" nzBordered [nzColumn]="1">
+  <nz-descriptions-item *ngFor="let item of transactionDisplay$ | async" [nzTitle]="item.title">
+    <div class="data-col">
+      <ng-container *ngIf="item.linkVal; else notLink"
+        ><a [routerLink]="[item.linkVal]">{{ item.data }}</a></ng-container
+      ><ng-template #notLink>{{ item.data }}</ng-template>
+    </div>
+  </nz-descriptions-item>
+</nz-descriptions>
+
+<nz-descriptions nzTitle="Receipt" nzBordered [nzColumn]="1">
+  <nz-descriptions-item *ngFor="let item of receiptDisplay$ | async" [nzTitle]="item.title">
+    <div class="data-col">
+      <ng-container *ngIf="item.linkVal; else notLink"
+        ><a [routerLink]="[item.linkVal]">{{ item.data }}</a></ng-container
+      ><ng-template #notLink>{{ item.data }}</ng-template>
+    </div>
+  </nz-descriptions-item>
+</nz-descriptions>
+
+<nz-descriptions nzTitle="Logs" nzBordered [nzColumn]="1" *ngIf="(logsDisplay$ | async).length"> </nz-descriptions>
+<nz-table #logsTable *ngIf="(logsDisplay$ | async).length" [nzData]="logsDisplay$ | async">
+  <thead>
+    <tr>
+      <th>Log Index</th>
+      <th>Data</th>
+      <th>Removed</th>
+      <th>Topics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let data of logsTable.data">
+      <tr>
+        <td class="wb-b-a">
+          {{ data.logIndex }}
+        </td>
+        <td class="wb-b-a">
+          {{ data.data }}
+        </td>
+        <td class="wb-b-a">
+          {{ data.removed }}
+        </td>
+        <td class="wb-b-a">{{data.topics.join('<br />')}}</td>
+      </tr>
+    </ng-container>
+  </tbody>
+</nz-table>
