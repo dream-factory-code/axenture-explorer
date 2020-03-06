@@ -12,7 +12,7 @@ export class TransactionState {
   @Selector()
   static transaction(transactionState: any): any {
     const transaction = transactionState
-    console.log(transaction)
+
     return transaction
   }
 

@@ -1,5 +1,24 @@
 <nz-descriptions [nzTitle]="'Transaction ' + (transaction$ | async)?.transaction?.hash" nzBordered [nzColumn]="1">
-  <nz-descriptions-item *ngFor="let item of transactionDisplay$ | async" [nzTitle]="item.title">
+  <nz-descriptions-item *ngFor="let item of transactionDisplay$ | async" [nzTitle]="item.title | titlecase">
+    <div class="data-col">
+      <ng-container *ngIf="item.linkVal; else formatJson"
+        ><a [routerLink]="[item.linkVal]">{{ item.data }}</a></ng-container
+      >
+      <ng-template #formatJson>
+        <ng-container *ngIf="item?.formatJson; else default">
+          <pre>{{ item.data | json }}</pre>
+        </ng-container>
+      </ng-template>
+      <ng-template #default>
+        <span>{{ item.data }}</span></ng-template
+      >
+      <ng-template #default>{{ item.data }}</ng-template>
+    </div>
+  </nz-descriptions-item>
+</nz-descriptions>
+<br />
+<nz-descriptions nzTitle="Receipt" nzBordered [nzColumn]="1" *ngIf="(receiptDisplay$ | async)?.length">
+  <nz-descriptions-item *ngFor="let item of receiptDisplay$ | async" [nzTitle]="item.title | titlecase">
     <div class="data-col">
       <ng-container *ngIf="item.linkVal; else notLink"
         ><a [routerLink]="[item.linkVal]">{{ item.data }}</a></ng-container
@@ -8,17 +27,7 @@
   </nz-descriptions-item>
 </nz-descriptions>
 
-<nz-descriptions nzTitle="Receipt" nzBordered [nzColumn]="1">
-  <nz-descriptions-item *ngFor="let item of receiptDisplay$ | async" [nzTitle]="item.title">
-    <div class="data-col">
-      <ng-container *ngIf="item.linkVal; else notLink"
-        ><a [routerLink]="[item.linkVal]">{{ item.data }}</a></ng-container
-      ><ng-template #notLink>{{ item.data }}</ng-template>
-    </div>
-  </nz-descriptions-item>
-</nz-descriptions>
-
-<nz-descriptions nzTitle="Logs" nzBordered [nzColumn]="1" *ngIf="(logsDisplay$ | async).length"> </nz-descriptions>
+<nz-descriptions nzTitle="Logs" nzBordered [nzColumn]="1" *ngIf="(logsDisplay$ | async).length"></nz-descriptions>
 <nz-table #logsTable *ngIf="(logsDisplay$ | async).length" [nzData]="logsDisplay$ | async">
   <thead>
     <tr>

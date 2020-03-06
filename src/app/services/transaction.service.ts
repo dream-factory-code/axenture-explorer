@@ -10,9 +10,7 @@ import { TransactionState } from '../state/transaction.state'
   providedIn: 'root',
 })
 export class TransactionService {
-  constructor(private store: Store, private web3Service: Web3Service) {
-    console.log('transaction service constructed')
-  }
+  constructor(private store: Store, private web3Service: Web3Service) {}
 
   @Select(TransactionState.transaction)
   transaction$: Observable<any>

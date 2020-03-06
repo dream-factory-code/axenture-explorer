@@ -9,7 +9,7 @@
       <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
         <ul>
           <li nz-menu-item [nzSelected]="isNavItemSelected()">
-            <a routerLink="/">Welcome </a>
+            <a routerLink="/">Main </a>
           </li>
           <li nz-menu-item [nzSelected]="isNavItemSelected('block')">
             <a routerLink="/block">Block</a>
@@ -20,10 +20,11 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+      <div class="app-header" style="display: flex;">
+        <span class="header-trigger p-tb-0" (click)="isCollapsed = !isCollapsed">
           <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
         </span>
+        <app-main-search></app-main-search>
       </div>
     </nz-header>
     <nz-content>

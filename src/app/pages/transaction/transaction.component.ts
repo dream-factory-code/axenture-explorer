@@ -27,6 +27,13 @@ export class TransactionComponent implements OnInit {
     'value',
     { key: 'gas', title: 'Gas Limit' },
     { key: 'gasPrice', format: (item) => `${item} (${this.web3Service.web3.utils.fromWei(item, 'gwei')} Gwei)` },
+    {
+      key: 'input',
+      format: (item) => {
+        return JSON.parse(this.web3Service.web3.utils.hexToUtf8(item))
+      },
+      formatJson: true,
+    },
   ]
 
   constructor(private transactionService: TransactionService, private web3Service: Web3Service) {}
@@ -35,10 +42,12 @@ export class TransactionComponent implements OnInit {
     this.transaction$ = this.transactionService.transaction$
     this.transactionDisplay$ = this.transactionService.transaction$.pipe(
       map((transactionState) => {
+        if (!transactionState.transaction) return
         return this.transactionDisplayOrder.map((item: any) => {
           const key = item.key || item
           const value = item.format ? item.format(transactionState.transaction[key]) : transactionState.transaction[key]
           const linkVal = item.linkFn ? item.linkFn(value) : undefined
+          const formatJson = item.formatJson || false
           return {
             title:
               item.title ||
@@ -48,6 +57,7 @@ export class TransactionComponent implements OnInit {
                 .join(' '),
             data: value,
             linkVal,
+            formatJson,
           }
         })
       })

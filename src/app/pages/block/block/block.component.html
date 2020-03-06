@@ -1,5 +1,5 @@
 <nz-descriptions [nzTitle]="'Block Info #' + (block$ | async)?.number" nzBordered [nzColumn]="1">
-  <nz-descriptions-item *ngFor="let item of blockDisplay$ | async" [nzTitle]="item.title">
+  <nz-descriptions-item *ngFor="let item of blockDisplay$ | async" [nzTitle]="item.title | titlecase">
     <div class="data-col">
       <ng-container *ngIf="item.linkVal; else notLink"
         ><a [routerLink]="[item.linkVal]">{{ item.data }}</a></ng-container

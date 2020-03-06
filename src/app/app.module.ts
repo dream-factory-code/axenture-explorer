@@ -22,11 +22,12 @@ import { TransactionComponent } from './pages/transaction/transaction.component'
 import { AddressComponent } from './pages/address/address.component'
 import { CurrentAddressState } from './state/current-address.state'
 import { TransactionState } from './state/transaction.state'
+import { MainSearchComponent } from './main-search/main-search.component'
 
 registerLocaleData(en)
 
 @NgModule({
-  declarations: [AppComponent, TransactionComponent, AddressComponent],
+  declarations: [AppComponent, TransactionComponent, AddressComponent, MainSearchComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -38,7 +39,7 @@ registerLocaleData(en)
     NgxsModule.forRoot([CurrentBlockState, RecentBlocksState, SummaryState, AllBlocksState, CurrentAddressState, TransactionState], {
       developmentMode: !environment.production,
     }),
-    NgxsLoggerPluginModule.forRoot(),
+    // NgxsLoggerPluginModule.forRoot(),
     AntdModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

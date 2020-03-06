@@ -13,7 +13,6 @@ import { SummaryService } from './summary.service'
 })
 export class AllBlocksService {
   blockNumber$: Observable<number>
-
   constructor(private store: Store, private web3Service: Web3Service, private summaryService: SummaryService) {}
 
   @Select(AllBlocksState.allBlocks)
