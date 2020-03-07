@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core'
 import Web3 from 'web3'
 import { environment } from '../../environments/environment'
-import { from } from 'rxjs'
-import { flatMap, tap } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 
 @Injectable({

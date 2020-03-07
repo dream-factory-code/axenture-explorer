@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router'
 import { Observable, of } from 'rxjs'
 import { AddressService } from '../services/address.service'
-import { tap, catchError } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators'
 import { Web3Service } from '../services/web3.service'
 
 @Injectable({ providedIn: 'root' })
@@ -14,7 +14,7 @@ export class AddressResolver implements Resolve<any> {
       return of(false)
     }
     return this.addressService.getAddress$(route.params.id).pipe(
-      catchError((err) => {
+      catchError(() => {
         this.router.navigate(['/'])
         return of(false)
       })

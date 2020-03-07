@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core'
 import { Observable } from 'rxjs'
-import { IBlock } from 'src/app/interfaces/block.interface'
 import { RecentBlocksService } from 'src/app/services/recent-blocks.service'
 import { tap, map } from 'rxjs/operators'
 

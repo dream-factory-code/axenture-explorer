@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { Observable, Subject } from 'rxjs'
-import { map, tap, withLatestFrom } from 'rxjs/operators'
+import { Observable } from 'rxjs'
+import { map, tap } from 'rxjs/operators'
 
 import { ISummary } from 'src/app/interfaces/summary.interface'
 import { SummaryService } from 'src/app/services/summary.service'

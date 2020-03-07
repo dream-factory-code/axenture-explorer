@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Observable, merge, from, forkJoin, concat, Subject } from 'rxjs'
-import { delay, repeat, expand, reduce, skip, tap, takeUntil } from 'rxjs/operators'
+import { delay, repeat, expand, reduce, skip, takeUntil } from 'rxjs/operators'
 import { pollingConf } from '../configs/polling.config'
 
 @Injectable({

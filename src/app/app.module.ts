@@ -12,7 +12,6 @@ import { registerLocaleData } from '@angular/common'
 import en from '@angular/common/locales/en'
 import { NgxsModule } from '@ngxs/store'
 import { environment } from '../environments/environment'
-import { CurrentBlockState } from './state/current-block.state'
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin'
 import { AntdModule } from './antd.module'
 import { RecentBlocksState } from './state/recent-blocks.state'
@@ -36,10 +35,11 @@ registerLocaleData(en)
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgxsModule.forRoot([CurrentBlockState, RecentBlocksState, SummaryState, AllBlocksState, CurrentAddressState, TransactionState], {
+    NgxsModule.forRoot([RecentBlocksState, SummaryState, AllBlocksState, CurrentAddressState, TransactionState], {
       developmentMode: !environment.production,
     }),
     // NgxsLoggerPluginModule.forRoot(),
+    // module used for debugging state
     AntdModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

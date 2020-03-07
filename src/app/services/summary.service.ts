@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { PollingService } from './polling.service'
 import { Web3Service } from './web3.service'
-import { map, flatMap, withLatestFrom, tap } from 'rxjs/operators'
+import { map, flatMap, withLatestFrom } from 'rxjs/operators'
 import { Observable, forkJoin } from 'rxjs'
 import { ISummary } from '../interfaces/summary.interface'
 import { Store, Select } from '@ngxs/store'
@@ -28,15 +28,6 @@ export class SummaryService {
   summary$: Observable<ISummary>
 
   private pollSummary$(): Observable<ISummary> {
-    /*return this.pollingService
-      .pollMultiplePromises$([
-        this.web3Service.web3.eth.getBlockNumber,
-        this.web3Service.web3.eth.getProtocolVersion,
-        this.web3Service.web3.eth.getNodeInfo,
-        this.web3Service.web3.eth.getGasPrice,
-        this.web3Service.web3.eth.getHashrate,
-        this.web3Service.web3.eth.net.getPeerCount,
-      ])*/
     return this.pollingService.pollMultiplePromises$([this.web3Service.web3.eth.getBlockNumber]).pipe(
       withLatestFrom(this.staticSummary$),
       map(([[blockNumber], [...rest]]) => [blockNumber, ...rest]),
