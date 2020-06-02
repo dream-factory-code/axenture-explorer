@@ -59,7 +59,7 @@ pipeline {
             steps {
                 sh 'docker system prune -f'
                 sh 'docker rmi ' + imageName
-                sh 'ssh -C ' + remoteAddress + ' "docker system prune -f"'
+                sh 'ssh -C ' + remoteAddress + ' "sudo docker system prune -f"'
             }
         }
     }
