@@ -45,8 +45,8 @@ pipeline {
 
                     slackMessage = "Deployed *Axenture Explorer* to *" + targetEnvironment + "* (" +
                             "<${env.RUN_DISPLAY_URL}|Pipeline>" +
-                            ", <https://testnet.dream-factory.hr/|Explorer Application>" +
                             ") \n" +
+                            "Links: <https://testnet.dream-factory.hr/|Explorer Application>\n" +
                             "Pipeline time: ${buildTime}"
 
                     slackSend(channel: slackChannel, color: 'good', message: slackMessage,
