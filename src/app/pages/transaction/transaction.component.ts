@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core'
-import { TransactionService } from 'src/app/services/transaction.service'
-import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
-import { Web3Service } from 'src/app/services/web3.service'
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { TransactionService } from 'src/app/services/transaction.service';
+import { Web3Service } from 'src/app/services/web3.service';
+
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-transaction',
@@ -30,7 +31,13 @@ export class TransactionComponent implements OnInit {
     {
       key: 'input',
       format: (item) => {
-        return JSON.parse(this.web3Service.web3.utils.hexToUtf8(item))
+        let res
+        try {
+          res = JSON.parse(this.web3Service.web3.utils.hexToUtf8(item))
+        } catch (e) {
+          res
+        }
+        return res
       },
       formatJson: true,
     },
@@ -41,6 +48,7 @@ export class TransactionComponent implements OnInit {
   ngOnInit() {
     this.transaction$ = this.transactionService.transaction$
     this.transactionDisplay$ = this.transactionService.transaction$.pipe(
+      tap(console.log),
       map((transactionState) => {
         if (!transactionState.transaction) return
         return this.transactionDisplayOrder.map((item: any) => {
