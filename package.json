@@ -23,7 +23,7 @@
     "@ngxs-labs/immer-adapter": "^3.0.5",
     "@ngxs/store": "^3.6.2",
     "bignumber.js": "^9.0.0",
-    "immer": "^4.0.0",
+    "immer": "^9.0.6",
     "ng-zorro-antd": "^8.5.2",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
